@@ -1,0 +1,16 @@
+#{extends 'main.html' /}
+#{set title:'Tomhet vs vansklighet | Svedjebratt.se' /}
+
+#{set 'moreScripts'}
+    <script type="text/javascript" src="@{'/public/javascripts/general.js'}"></script>
+#{/set}
+
+<div id="splash">
+
+    <div id="menu">
+        #{a @index(), 'title': 'Down the Pit!', 'class': 'ui-corner-all'}!#{/a}
+    </div>
+
+    #{doLayout/}
+
+</div>

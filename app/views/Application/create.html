@@ -1,0 +1,16 @@
+#{extends 'splash.html' /}
+
+#{ifErrors}
+    <ul id="errors">
+        #{ifError 'shout.echo'}
+            <li>#{error 'shout.echo'/}</li>
+        #{/ifError}
+    </ul>
+#{/ifErrors}
+
+#{form @add()}
+    <div>
+        <input type="text" id="echo-input" name="shout.echo" maxlength="60" value="${flash['shout.echo']}" class="ui-corner-all"/><br/>
+        <input type="submit" value="Shout in the pit!" class="btn"/>
+    </div>
+#{/form}
