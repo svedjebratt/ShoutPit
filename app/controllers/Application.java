@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Shout;
+import play.Play;
 import play.cache.Cache;
 import play.data.validation.Valid;
 import play.mvc.Controller;
@@ -30,6 +31,10 @@ public class Application extends Controller {
     private static String getShoutUrl(Shout shout) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("id", shout.id);
+        String baseUrl = Play.configuration.getProperty("application.baseUrl");
+        if (baseUrl != null && baseUrl.length() > 0) {
+            return baseUrl + Router.reverse("Application.show", map).url;
+        }
         return Router.getFullUrl("Application.show", map);
     }
 
