@@ -41,18 +41,25 @@ ul#errors {
     text-align: left;
 }
 
-#menu a {
+#menu a, a.shout {
     display: inline-block;
     font-family: verdana;
     text-decoration: none;
     font-size: 10px;
     color: #000;
     font-weight: bold;
-    width: 10px;
+    width: 12px;
     text-align: center;
+    margin-right: 2px;
 }
 
-#menu a:hover {
+#menu a:hover, a.shout:hover {
     color: #fff;
     background: #000;
+}
+
+#share {
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
 }

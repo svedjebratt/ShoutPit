@@ -5,7 +5,7 @@
 # Home page
 GET     /                                       Application.index
 POST    /update/{id}                            Application.update
-GET     /create                                 Application.create
+GET     /shout                                  Application.create
 POST    /add                                    Application.add
 GET     /shout/{id}                             Application.show
 GET     /added/{id}                             Application.added

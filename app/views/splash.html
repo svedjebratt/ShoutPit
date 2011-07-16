@@ -1,5 +1,4 @@
 #{extends 'main.html' /}
-#{set title:'Tomhet vs vansklighet | Svedjebratt.se' /}
 
 #{set 'moreScripts'}
     <script type="text/javascript" src="@{'/public/javascripts/general.js'}"></script>
@@ -14,3 +13,15 @@
     #{doLayout/}
 
 </div>
+
+#{if shareUrl && play.Play.configuration.getProperty("addthis") == "true"}
+    <div id="share">
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style ">
+            <a href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4e21517349c9f2de" class="addthis_button_compact" addthis:url="${shareUrl}"></a>
+        </div>
+        <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e21517349c9f2de"></script>
+        <!-- AddThis Button END -->
+    </div>
+#{/if}

@@ -4,13 +4,14 @@ import models.Shout;
 import play.cache.Cache;
 import play.data.validation.Valid;
 import play.mvc.Controller;
+import play.mvc.Router;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class Application extends Controller {
-
-    public static final String NEW_SHOUT = "newShout";
 
     public static void index() {
         long shoutCount = Shout.count();
@@ -19,21 +20,24 @@ public class Application extends Controller {
             List<Shout> shouts = Shout.all().from(random).fetch(1);
             if (shouts.size() > 0) {
                 Shout shout = shouts.get(0);
-                render(shout);
+                String shareUrl = getShoutUrl(shout);
+                render(shout, shareUrl);
             }
         }
         create();
     }
 
+    private static String getShoutUrl(Shout shout) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", shout.id);
+        return Router.getFullUrl("Application.show", map);
+    }
+
     public static void show(long id) {
         Shout shout = Shout.<Shout>findById(id);
         if (shout != null) {
-            boolean newShout = false;
-            if (Cache.get(NEW_SHOUT) != null && (Boolean) Cache.get(NEW_SHOUT)) {
-                newShout = true;
-                Cache.delete(NEW_SHOUT);
-            }
-            render("/Application/index.html", shout, newShout);
+            String shareUrl = getShoutUrl(shout);
+            render("/Application/index.html", shout, shareUrl);
         }
         index();
     }
@@ -60,7 +64,6 @@ public class Application extends Controller {
         if (shout.id == null) {
             shout.save();
         }
-        Cache.add(NEW_SHOUT, true);
         added(shout.id);
     }
 

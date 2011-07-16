@@ -1,8 +1,10 @@
 #{extends 'splash.html' /}
+#{set title: shout.echo + ' | Svedjebratt.se'/}
 
 <div id="echo">
     ${shout.echo}
 </div>
+
 <div id="footer">
-    #{a @create()}Shout in the pit#{/a}
+    #{a @create(), 'title': 'Shout in the Pit!', 'class': 'shout ui-corner-all'}+#{/a}
 </div>
