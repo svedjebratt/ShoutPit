@@ -33,7 +33,7 @@ public class Application extends Controller {
         map.put("id", shout.id);
         String baseUrl = Play.configuration.getProperty("application.baseUrl");
         if (baseUrl != null && baseUrl.length() > 0) {
-            return baseUrl + Router.reverse("Application.show", map).url;
+            return (baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl) + Router.reverse("Application.show", map).url;
         }
         return Router.getFullUrl("Application.show", map);
     }
