@@ -1,4 +1,4 @@
-#{extends 'splash.html' /}
+#{extends 'main.html' /}
 #{set title: shout.echo + ' | Svedjebratt.se'/}
 
 <div id="echo">
@@ -6,5 +6,13 @@
 </div>
 
 <div id="footer">
-    #{a @create(), 'title': 'Shout in the Pit!', 'class': 'shout ui-corner-all'}+#{/a}
+    <div class="bar-right">
+        #{a @create(), 'title': 'Shout in the Pit!', 'class': 'shout ui-corner-all'}+#{/a}
+    </div>
 </div>
+
+#{secure.check 'admin'}
+    <div id="admin">
+        Created: ${shout.createdFormatted()}
+    </div>
+#{/secure.check}

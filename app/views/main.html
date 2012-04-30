@@ -24,13 +24,48 @@
             })();
         </script>
     #{/if}
-    <script type="text/javascript" src="${'/public/javascripts/jquery-1.6.min.js'}"></script>
-    <script type="text/javascript" src="${'/public/javascripts/jquery-ui.min.js'}"></script>
+    <script type="text/javascript" src="@{'/public/javascripts/jquery-1.6.min.js'}"></script>
+    <script type="text/javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"></script>
+    <script type="text/javascript" src="@{'/public/javascripts/general.js'}"></script>
     #{get 'moreScripts' /}
 </head>
 <body>
 <div id="main">
-    #{doLayout /}
+
+    <div id="splash">
+
+        <div id="menu">
+            <div class="bar-left">
+                #{a @index(), 'title': 'Down the Pit!', 'class': 'ui-corner-all shout'}!#{/a}
+            </div>
+            #{if shout}
+                #{secure.check 'admin'}
+                    <div class="bar-right">
+                        #{a @edit(shout.id), 'title': 'Edit Shout', 'class': 'ui-corner-all shout'}
+                            e
+                        #{/a}#{a @remove(shout.id), 'title': 'Remove Shout', 'class': 'ui-corner-all shout', 'id': 'remove'}
+                            x
+                        #{/a}
+                    </div>
+                #{/secure.check}
+            #{/if}
+        </div>
+
+        #{doLayout/}
+
+    </div>
+
+    #{if shareUrl && play.Play.configuration.getProperty("addthis") == "true"}
+        <div id="share">
+            <!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style ">
+                <a href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4e21517349c9f2de" class="addthis_button_compact" addthis:url="${shareUrl}"></a>
+            </div>
+            <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e21517349c9f2de"></script>
+            <!-- AddThis Button END -->
+        </div>
+    #{/if}
 </div>
 </body>
 </html>

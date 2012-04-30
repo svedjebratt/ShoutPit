@@ -75,4 +75,18 @@ public class Application extends Controller {
     public static void added(long id) {
         render(id);
     }
+
+    @Check("admin")
+    public static void remove(long id) {
+        Shout shout = Shout.findById(id);
+        if (shout != null) {
+            shout.delete();
+        }
+        index();
+    }
+
+    @Check("admin")
+    public static void edit(long id) {
+        render("/Application/create.html");
+    }
 }

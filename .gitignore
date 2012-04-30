@@ -1,3 +1,7 @@
 *.iml
+.idea
 tmp
+modules
+logs
+test-result
 
