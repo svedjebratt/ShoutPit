@@ -1,10 +1,9 @@
 # --- !Ups
  
 CREATE TABLE shout (
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     echo varchar(60) NOT NULL,
-    created timestamp NOT NULL,
-    PRIMARY KEY (id)
+    created timestamp NOT NULL
 );
  
 # --- !Downs

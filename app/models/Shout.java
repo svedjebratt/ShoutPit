@@ -3,11 +3,9 @@ package models;
 import controllers.CRUD;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
-import play.db.jpa.Model;
+import play.db.jpa.GenericModel;
 
-import javax.persistence.Entity;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,7 +14,20 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "shout")
-public class Shout extends Model {
+public class Shout extends GenericModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public Object _key() {
+        return getId();
+    }
 
     @Required(message = "Give us a holler!")
     @MaxSize(value = 60, message = "Shout man, don't give us no fucking novel!")
